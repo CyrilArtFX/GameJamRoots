@@ -5,10 +5,8 @@ using UnityEngine;
 
 public class Grabber : MonoBehaviour
 {
-	public bool IsCurrentlyGrabbing => grabbable != null && controller.Input.isGrabbing;
+	public bool IsCurrentlyGrabbing => grabbable != null && controller.Input.isGrabbing && grabbable.CanPlayerControl;
 
-	[SerializeField]
-	private float grabForce = 5.0f;
 	[SerializeField]
 	private float lostGrabTime = 0.2f;
 
@@ -30,7 +28,7 @@ public class Grabber : MonoBehaviour
 		player_dir.y = 0.0f;
 		player_dir.Normalize();
 
-		grabbable.Move( player_dir, grabForce );
+		grabbable.Move( player_dir );
 	}
 
 	void OnTriggerEnter( Collider collider )

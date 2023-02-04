@@ -3,19 +3,24 @@ using Utils;
 
 public class Grabbable : MonoBehaviour
 {
+	public bool CanPlayerControl { get; set; }
 	public Vector3 DesiredDirection { get; private set; }
 	public Vector3 MoveDirection { get; set; }
 	public Rigidbody Rigidbody { get; private set; }
 
 	public IntersectionRail PreviousRail, NextRail;
 
+	[SerializeField]
+	private float moveSpeed = 2.0f;
+
 	void Awake()
 	{
+		CanPlayerControl = true;
 		MoveDirection = Vector3.right;
 		Rigidbody = GetComponent<Rigidbody>(); 
 	}
 
-	public void Move( Vector3 desired_dir, float force )
+	public void Move( Vector3 desired_dir )
 	{
 		if ( desired_dir == Vector3.zero ) 
 		{
@@ -30,7 +35,7 @@ public class Grabbable : MonoBehaviour
 		}
 		target.y = transform.position.y;
 
-		float move_speed = force * Time.deltaTime;
+		float move_speed = moveSpeed * Time.deltaTime;
 		transform.position = Vector3.MoveTowards( transform.position, target, move_speed );
 
 		DesiredDirection = desired_dir;

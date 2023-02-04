@@ -11,13 +11,26 @@ public class IntersectionRail : MonoBehaviour
 
 	private Grabbable grabbable;
 
+	private bool canSwitchDirection = false;
 
 	void Update()
 	{
 		if ( !grabbable ) return;
 
+		if ( !canSwitchDirection )
+		{
+			SnapToPosition();
+			return;
+		}
+
+		GrabbableSwitchDesiredDirection();
+	}
+
+	private void GrabbableSwitchDesiredDirection()
+	{
 		if ( grabbable.DesiredDirection == Vector3.zero ) return;
 
+		//  get most desired direction to follow
 		float best_dot = -1.0f;
 		IntersectionRail next_rail = null;
 		foreach ( IntersectionRail rail in connectedRails )
@@ -31,17 +44,30 @@ public class IntersectionRail : MonoBehaviour
 			}
 		}
 
-		if ( next_rail == null ) return;
-		if ( grabbable.NextRail == next_rail ) return;
+		//  switch rails
+		if ( next_rail == null || grabbable.NextRail == next_rail ) return;
 
-		//grabbable.transform.position = new( transform.position.x, grabbable.transform.position.y, transform.position.z );
 		grabbable.PreviousRail = this;
 		grabbable.NextRail = next_rail;
+	}
+
+	private void SnapToPosition()
+	{
+		grabbable.Move( ( transform.position - grabbable.transform.position ).normalized );
+
+		if ( VectorPlus.GetXZ( grabbable.transform.position - transform.position ) == Vector3.zero )
+		{
+			canSwitchDirection = true;
+			grabbable.CanPlayerControl = true;
+		}
 	}
 
 	void OnTriggerEnter( Collider collider )
 	{
 		if ( !collider.TryGetComponent( out grabbable ) ) return;
+
+		canSwitchDirection = false;
+		grabbable.CanPlayerControl = false;
 	}
 
 	void OnTriggerExit( Collider collider )

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3682681791473619720}
   - component: {fileID: 3682681791473619719}
   - component: {fileID: 3682681791473619718}
+  - component: {fileID: 2479647623071996147}
   m_Layer: 7
   m_Name: Grabbable
   m_TagString: Untagged
@@ -47,8 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9fd98e873368444a9ce0e178a784fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FromRail: {fileID: 0}
-  ToRail: {fileID: 0}
+  PreviousRail: {fileID: 0}
+  NextRail: {fileID: 0}
+  moveSpeed: 2
 --- !u!33 &3682681791473619720
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -77,7 +79,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: a238ead33674f594dbd2131e89687ae1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -112,3 +114,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &2479647623071996147
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3682681791473619717}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
