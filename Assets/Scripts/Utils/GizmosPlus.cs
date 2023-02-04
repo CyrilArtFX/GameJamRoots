@@ -11,6 +11,8 @@ namespace Utils
 
 		public static void DrawArrow( Vector3 pos, Vector3 dir )
 		{
+			if ( dir == Vector3.zero ) return;
+
 			Gizmos.DrawRay( pos, dir );
 
 			Vector3 right = ( Quaternion.LookRotation( dir ) * Quaternion.Euler( ARROW_HEAD_ANGLE, 0.0f, 0.0f ) * Vector3.back ) * ARROW_HEAD_LENGTH ;

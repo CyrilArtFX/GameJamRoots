@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Grabber : MonoBehaviour
 {
+	public bool IsCurrentlyGrabbing => grabbable != null && controller.Input.isGrabbing;
+
 	[SerializeField]
 	private float grabForce = 5.0f;
 	[SerializeField]
@@ -22,32 +24,12 @@ public class Grabber : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if ( !grabbable || !controller.Input.isGrabbing ) return;
-
-		/*Vector3 move_dir = controller.LastMoveDirection.normalized;
-		if ( Mathf.Abs( Mathf.Abs( move_dir.x ) - Mathf.Abs( move_dir.z ) ) <= 0.2f ) return;
-		if ( Mathf.Abs( move_dir.x ) > Mathf.Abs( move_dir.z ) )
-		{
-			move_dir = new( move_dir.x, 0.0f, 0.0f );
-		}
-		else
-		{
-			move_dir = new( 0.0f, 0.0f, move_dir.z );
-		}*/
+		if ( !IsCurrentlyGrabbing ) return;
 
 		Vector3 player_dir = controller.LastMoveDirection;
-		if ( Mathf.Abs( player_dir.x ) > Mathf.Abs( player_dir.z ) )
-		{
-			player_dir = new( player_dir.x, 0.0f, 0.0f );
-		}
-		else
-		{
-			player_dir = new( 0.0f, 0.0f, player_dir.z );
-		}
+		player_dir.y = 0.0f;
 		player_dir.Normalize();
 
-		//print( Mathf.Round( player_dir.x ) + " " + 0.0f + " " + Mathf.Round( player_dir.y ) );
-		
 		grabbable.Move( player_dir, grabForce );
 	}
 

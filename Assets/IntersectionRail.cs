@@ -6,38 +6,37 @@ using Utils;
 
 public class IntersectionRail : MonoBehaviour
 {
-	[Flags]
-	public enum Axes
-	{
-		PositiveX = 1,
-		NegativeX = 2,
-		PositiveZ = 4,
-		NegativeZ = 8,
-	}
-
 	[SerializeField]
-	private Axes allowedAxes = Axes.PositiveX | Axes.NegativeX | Axes.PositiveZ | Axes.NegativeZ;
-
-	[SerializeField]
-	private Collider[] axesColliders;
+	private IntersectionRail[] connectedRails;
 
 	private Grabbable grabbable;
 
-	public bool IsAllowingAxis( Axes axis )
-	{
-		return ( allowedAxes & axis ) == axis;
-	}
 
 	void Update()
 	{
 		if ( !grabbable ) return;
 
 		if ( grabbable.DesiredDirection == Vector3.zero ) return;
-		if ( grabbable.DesiredDirection == grabbable.MoveDirection ) return;
 
-		grabbable.transform.position = new( transform.position.x, grabbable.transform.position.y, transform.position.z );
-		grabbable.MoveDirection = grabbable.DesiredDirection;
-		print( grabbable + " " + grabbable.DesiredDirection );
+		float best_dot = -1.0f;
+		IntersectionRail next_rail = null;
+		foreach ( IntersectionRail rail in connectedRails )
+		{
+			Vector3 dir = ( rail.transform.position - transform.position ).normalized;
+			float dot = Vector3.Dot( dir, grabbable.DesiredDirection );
+			if ( dot > best_dot )
+			{
+				best_dot = dot;
+				next_rail = rail;
+			}
+		}
+
+		if ( next_rail == null ) return;
+		if ( grabbable.NextRail == next_rail ) return;
+
+		//grabbable.transform.position = new( transform.position.x, grabbable.transform.position.y, transform.position.z );
+		grabbable.PreviousRail = this;
+		grabbable.NextRail = next_rail;
 	}
 
 	void OnTriggerEnter( Collider collider )
@@ -52,43 +51,21 @@ public class IntersectionRail : MonoBehaviour
 		grabbable = null;
 	}
 
-	void OnValidate()
-	{
-		if ( axesColliders == null || axesColliders.Length != 4 ) 
-		{
-			Debug.LogWarning( "IntersectionRail: please specify 4 axes colliders!" );
-			return;
-		}
-
-		axesColliders[0].enabled = !IsAllowingAxis( Axes.PositiveX );
-		axesColliders[1].enabled = !IsAllowingAxis( Axes.NegativeX );
-		axesColliders[2].enabled = !IsAllowingAxis( Axes.PositiveZ );
-		axesColliders[3].enabled = !IsAllowingAxis( Axes.NegativeZ );
-	}
-
 	void OnDrawGizmos()
 	{
 		Gizmos.color = Color.white;
 
-		//  draw allowed axes
-		if ( IsAllowingAxis( Axes.PositiveX ) )
-			GizmosPlus.DrawArrow( transform.position, Vector3.right );
-		else 
-			GizmosPlus.DrawWireCollider( axesColliders[0] );
+		if ( connectedRails != null )
+		{
+			foreach ( IntersectionRail rail in connectedRails )
+			{
+				Vector3 dir = rail.transform.position - transform.position;
+				Vector3 dir_normalized = dir.normalized;
+				//GizmosPlus.DrawArrow( transform.position, dir );
 
-		if ( IsAllowingAxis( Axes.NegativeX ) )
-			GizmosPlus.DrawArrow( transform.position, -Vector3.right );
-		else 
-			GizmosPlus.DrawWireCollider( axesColliders[1] );
-
-		if ( IsAllowingAxis( Axes.PositiveZ ) )
-			GizmosPlus.DrawArrow( transform.position, Vector3.forward );
-		else 
-			GizmosPlus.DrawWireCollider( axesColliders[2] );
-
-		if ( IsAllowingAxis( Axes.NegativeZ ) )
-			GizmosPlus.DrawArrow( transform.position, -Vector3.forward );
-		else 
-			GizmosPlus.DrawWireCollider( axesColliders[3] );
+				Vector3 offset = new( dir_normalized.z * 0.1f, 0.0f, -dir_normalized.x * 0.1f );
+				GizmosPlus.DrawArrow( transform.position + offset, dir );
+			}
+		}
 	}
 }
