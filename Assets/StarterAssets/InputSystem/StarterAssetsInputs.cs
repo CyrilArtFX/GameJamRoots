@@ -13,6 +13,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool isGrabbing;
+		public float rotation;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -48,6 +49,11 @@ namespace StarterAssets
 		public void OnGrab(InputValue value)
 		{
 			isGrabbing = value.isPressed;
+		}
+
+		public void OnRotate(InputValue value)
+		{
+			rotation = value.Get<float>();
 		}
 #endif
 
