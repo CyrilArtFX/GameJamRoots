@@ -40,6 +40,10 @@ public class LightSource : MonoBehaviour
             {
                 reflector.ReceiveLight(hit.point, ray_direction, hit.normal, this);
             }
+            if(hit.collider.TryGetComponent(out LightBrasier brasier))
+            {
+                brasier.TriggerBrasier();
+            }
         }
 
         if(moveablePureLight)
