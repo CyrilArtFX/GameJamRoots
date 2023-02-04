@@ -6,6 +6,7 @@ using UnityEngine;
 public class Grabber : MonoBehaviour
 {
 	public bool IsCurrentlyGrabbing => grabbable != null && controller.Input.isGrabbing;
+	public Grabbable Grabbable => grabbable;
 
 	[SerializeField]
 	private float lostGrabTime = 0.2f;

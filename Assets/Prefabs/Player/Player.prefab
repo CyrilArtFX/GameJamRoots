@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 8974439488688746363}
   - component: {fileID: 4545619526698590492}
   - component: {fileID: 8449787909929492949}
+  - component: {fileID: 329104228691197427}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -117,6 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 4
+  GrabSpeed: 2
   SprintSpeed: 6
   RotationSpeed: 1
   SpeedChangeRate: 10
@@ -396,6 +398,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.5
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &329104228691197427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090972171681967811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5747300c3a990b2429eeac0c61ed78bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8929185508965759701
 GameObject:
   m_ObjectHideFlags: 0

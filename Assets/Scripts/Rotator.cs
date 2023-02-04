@@ -1,10 +1,24 @@
+using StarterAssets;
 using UnityEngine;
 
 public class Rotator : MonoBehaviour
 {
-    public void Rotate(float degreeAngleChange)
+    private Grabber grabber;
+    private FirstPersonController controller;
+
+    void Awake()
     {
-        Vector3 old_rotation = transform.rotation.eulerAngles;
-        transform.rotation = Quaternion.Euler(old_rotation.x, old_rotation.y + degreeAngleChange, old_rotation.z);
+        grabber = GetComponent<Grabber>();
+        controller = GetComponent<FirstPersonController>();
+    }
+
+    void Update()
+    {
+        if ( !grabber.Grabbable || !grabber.Grabbable.Rotable || !grabber.IsCurrentlyGrabbing ) return;
+
+        float rotation = controller.Input.rotation;
+        if ( rotation == 0.0f ) return;
+
+        grabber.Grabbable.Rotable.Rotate( rotation * Time.deltaTime );
     }
 }

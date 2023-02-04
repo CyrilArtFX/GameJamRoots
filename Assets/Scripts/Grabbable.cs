@@ -7,6 +7,7 @@ public class Grabbable : MonoBehaviour
 	public bool CanPlayerControl { get; set; }
 	public Vector3 DesiredDirection { get; private set; }
 	public Vector3 MoveDirection { get; set; }
+	public Rotable Rotable => rotable;
 
 	public IntersectionRail PreviousRail, NextRail;
 
@@ -14,6 +15,8 @@ public class Grabbable : MonoBehaviour
 	private float moveSpeed = 2.0f;
 	[SerializeField]
 	private LayerMask obstacleLayerMask;
+	[SerializeField]
+	private Rotable rotable;
 
 	private new Collider collider;
 	private new Rigidbody rigidbody;
