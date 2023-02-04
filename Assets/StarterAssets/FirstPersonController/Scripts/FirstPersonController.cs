@@ -17,6 +17,7 @@ namespace StarterAssets
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
 		public float MoveSpeed = 4.0f;
+		public float GrabSpeed = 2.0f;
 		[Tooltip("Sprint speed of the character in m/s")]
 		public float SprintSpeed = 6.0f;
 		[Tooltip("Rotation speed of the character")]
@@ -74,6 +75,7 @@ namespace StarterAssets
 		private CharacterController _controller;
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
+		private Grabber grabber;
 
 		private const float _threshold = 0.01f;
 
@@ -91,6 +93,8 @@ namespace StarterAssets
 
 		private void Awake()
 		{
+			grabber = GetComponent<Grabber>();
+
 			// get a reference to our main camera
 			if (_mainCamera == null)
 			{
@@ -157,7 +161,7 @@ namespace StarterAssets
 		private void Move()
 		{
 			// set target speed based on move speed, sprint speed and if sprint is pressed
-			float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+			float targetSpeed = grabber.IsCurrentlyGrabbing ? GrabSpeed : _input.sprint ? SprintSpeed : MoveSpeed;
 
 			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Grabber : MonoBehaviour
 {
-	public bool IsCurrentlyGrabbing => grabbable != null && controller.Input.isGrabbing && grabbable.CanPlayerControl;
+	public bool IsCurrentlyGrabbing => grabbable != null && controller.Input.isGrabbing;
 
 	[SerializeField]
 	private float lostGrabTime = 0.2f;
@@ -22,7 +22,7 @@ public class Grabber : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if ( !IsCurrentlyGrabbing ) return;
+		if ( !IsCurrentlyGrabbing || !grabbable.CanPlayerControl ) return;
 
 		Vector3 player_dir = controller.LastMoveDirection;
 		player_dir.y = 0.0f;
