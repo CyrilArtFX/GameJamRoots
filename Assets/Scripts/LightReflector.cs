@@ -10,16 +10,26 @@ public class LightReflector : MonoBehaviour
 
     void FixedUpdate()
     {
+        List<LightSource> reflectionsToRemove = new();
+
         foreach (LightSource originSource in lightReflections.Keys)
         {
             if (!lightReflections[originSource].ReceiveEmission)
             {
-                Destroy(lightReflections[originSource].gameObject);
-                lightReflections.Remove(originSource);
+                reflectionsToRemove.Add(originSource);
             }
             else
             {
                 lightReflections[originSource].ReceiveEmission = false;
+            }
+        }
+
+        if (reflectionsToRemove.Count > 0)
+        {
+            for (int i = reflectionsToRemove.Count - 1; i >= 0; i--)
+            {
+                Destroy(lightReflections[reflectionsToRemove[i]].gameObject);
+                lightReflections.Remove(reflectionsToRemove[i]);
             }
         }
     }
