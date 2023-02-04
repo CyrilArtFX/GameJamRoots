@@ -12,6 +12,7 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
+		public bool isGrabbing;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -43,7 +44,13 @@ namespace StarterAssets
 		{
 			SprintInput(value.isPressed);
 		}
+
+		public void OnGrab(InputValue value)
+		{
+			isGrabbing = value.isPressed;
+		}
 #endif
+
 
 
 		public void MoveInput(Vector2 newMoveDirection)
