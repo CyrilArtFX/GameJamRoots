@@ -10,9 +10,9 @@ public class DoorEditor : Editor
 
         DrawDefaultInspector();
         
-        if(GUILayout.Button("Set End Position"))
+        if(GUILayout.Button("Set End Rotation"))
         {
-            door.RecordEndPosition();
+            door.RecordEndRotation();
         }
     }
 }

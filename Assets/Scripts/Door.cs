@@ -8,9 +8,9 @@ public class Door : MonoBehaviour
     private float openingTime;
 
     [SerializeField, ReadOnly]
-    private Vector3 endPosition;
-    private Vector3 startPosition;
-    private Vector3 positionDelta;
+    private Vector3 endRotation;
+    private Vector3 startRotation;
+    private Vector3 rotationDelta;
 
     private bool isOpen, isOpening;
     private float timeSinceOpening;
@@ -19,14 +19,17 @@ public class Door : MonoBehaviour
 
     void Awake()
     {
-        startPosition = transform.position;
-        positionDelta = endPosition - startPosition;
+        startRotation = transform.rotation.eulerAngles;
+        rotationDelta = endRotation - startRotation;
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void RecordEndPosition()
+    public void RecordEndRotation()
     {
-        endPosition = transform.position;
+        endRotation = transform.rotation.eulerAngles;
+        endRotation.x -= endRotation.x > 180.0f ? 360.0f : 0.0f;
+        endRotation.y -= endRotation.y > 180.0f ? 360.0f : 0.0f;
+        endRotation.z -= endRotation.z > 180.0f ? 360.0f : 0.0f;
     }
 
     public void Open()
@@ -40,7 +43,7 @@ public class Door : MonoBehaviour
     {
         if(isOpening)
         {
-            transform.position = startPosition + positionDelta * openingCurve.Evaluate(timeSinceOpening / openingTime);
+            transform.rotation = Quaternion.Euler(startRotation + rotationDelta * openingCurve.Evaluate(timeSinceOpening / openingTime));
 
             timeSinceOpening += Time.deltaTime;
         }

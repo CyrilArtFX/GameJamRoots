@@ -41,7 +41,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5615166966692115577}
   - component: {fileID: 183397365214944419}
-  - component: {fileID: 8956565129310053648}
   - component: {fileID: 5090972171681967817}
   - component: {fileID: 5090972171681967812}
   - component: {fileID: 8793448813862220479}
@@ -87,20 +86,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lostGrabTime: 0.2
---- !u!114 &8956565129310053648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5090972171681967811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b360813e76a1d3742b21f0ee34a9dff4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grabber: {fileID: 183397365214944419}
-  rotationMultiplier: 1
 --- !u!143 &5090972171681967817
 CharacterController:
   m_ObjectHideFlags: 0
