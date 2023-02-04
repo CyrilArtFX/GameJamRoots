@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 8974439488688746363}
   - component: {fileID: 4545619526698590492}
   - component: {fileID: 8449787909929492949}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -85,7 +85,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2bd53331927b34ca395b652ea2e539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabForce: 2
   lostGrabTime: 0.2
 --- !u!143 &5090972171681967817
 CharacterController:
@@ -408,7 +407,7 @@ GameObject:
   - component: {fileID: 8929185508965759705}
   - component: {fileID: 8929185508965759704}
   - component: {fileID: 8929185508965759703}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
