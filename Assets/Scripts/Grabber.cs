@@ -31,8 +31,9 @@ public class Grabber : MonoBehaviour
 		grabbable.Move( player_dir );
 	}
 
-	void OnTriggerEnter( Collider collider )
+	void OnTriggerStay( Collider collider )
 	{
+		if ( grabbable != null ) return;
 		if ( !collider.TryGetComponent( out grabbable ) ) return;
 
 		if ( resetGrabCoroutine == null ) return;

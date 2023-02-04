@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using Utils;
 
 public class Grabbable : MonoBehaviour
@@ -6,18 +7,24 @@ public class Grabbable : MonoBehaviour
 	public bool CanPlayerControl { get; set; }
 	public Vector3 DesiredDirection { get; private set; }
 	public Vector3 MoveDirection { get; set; }
-	public Rigidbody Rigidbody { get; private set; }
 
 	public IntersectionRail PreviousRail, NextRail;
 
 	[SerializeField]
 	private float moveSpeed = 2.0f;
+	[SerializeField]
+	private LayerMask obstacleLayerMask;
+
+	private new Collider collider;
+	private new Rigidbody rigidbody;
 
 	void Awake()
 	{
 		CanPlayerControl = true;
 		MoveDirection = Vector3.right;
-		Rigidbody = GetComponent<Rigidbody>(); 
+
+		rigidbody = GetComponent<Rigidbody>(); 
+		collider = GetComponent<Collider>();
 	}
 
 	public void Move( Vector3 desired_dir )
@@ -28,6 +35,7 @@ public class Grabbable : MonoBehaviour
 			return;
 		};
 
+		//  get target position
 		Vector3 target = NextRail.transform.position;
 		if ( Vector3.Dot( NextRail.transform.position - transform.position, desired_dir ) < 0.0f )
 		{
@@ -35,8 +43,19 @@ public class Grabbable : MonoBehaviour
 		}
 		target.y = transform.position.y;
 
+		//  get move speed & next position
 		float move_speed = moveSpeed * Time.deltaTime;
-		transform.position = Vector3.MoveTowards( transform.position, target, move_speed );
+		Vector3 new_position = Vector3.MoveTowards( rigidbody.position, target, move_speed );
+
+		//  check collision first
+		foreach ( Collider collider in Physics.OverlapBox( new_position, collider.bounds.extents, transform.rotation, obstacleLayerMask ) )
+		{
+			if ( collider == this.collider ) continue;
+			return;
+		}
+
+		//  apply
+		rigidbody.MovePosition( new_position );
 
 		DesiredDirection = desired_dir;
 	}
