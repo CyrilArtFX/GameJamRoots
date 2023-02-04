@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.XR;
 using Utils;
 using static Grabber;
 
@@ -13,6 +15,9 @@ public class Grabbable : MonoBehaviour
 		GlobalZ,
 	}
 
+	public Vector3 DesiredDirection { get; private set; }
+	public Vector3 MovedDirection { get; private set; }
+	public Vector3 MoveDirection { get; set; }
 	public Rigidbody Rigidbody { get; private set; }
 
 	[SerializeField]
@@ -20,6 +25,7 @@ public class Grabbable : MonoBehaviour
 
 	void Awake()
 	{
+		MoveDirection = Vector3.right;
 		Rigidbody = GetComponent<Rigidbody>(); 
 	}
 	
@@ -38,6 +44,25 @@ public class Grabbable : MonoBehaviour
 		}
 
 		return Vector3.zero;
+	}
+
+	public void Move( Vector3 desired_dir, float force )
+	{
+		Vector3 grab_dir = MoveDirection;//GetGrabDirection();
+
+		float move_speed = force * Time.fixedDeltaTime * Vector3.Dot( grab_dir, desired_dir );
+		Vector3 move_dir = move_speed * grab_dir;
+
+		//  TODO: don't use physics (rigidbody + colliders)
+		Rigidbody.MovePosition( Rigidbody.position + move_dir );
+
+		DesiredDirection = desired_dir;
+		MovedDirection = move_dir;
+	}
+
+	private void LateUpdate()
+	{
+		DesiredDirection = MovedDirection = Vector3.zero;
 	}
 
 	void OnDrawGizmos()

@@ -35,16 +35,20 @@ public class Grabber : MonoBehaviour
 			move_dir = new( 0.0f, 0.0f, move_dir.z );
 		}*/
 
-		Vector3 player_dir = controller.LastMoveDirection.normalized;
+		Vector3 player_dir = controller.LastMoveDirection;
+		if ( Mathf.Abs( player_dir.x ) > Mathf.Abs( player_dir.z ) )
+		{
+			player_dir = new( player_dir.x, 0.0f, 0.0f );
+		}
+		else
+		{
+			player_dir = new( 0.0f, 0.0f, player_dir.z );
+		}
+		player_dir.Normalize();
 
 		//print( Mathf.Round( player_dir.x ) + " " + 0.0f + " " + Mathf.Round( player_dir.y ) );
 		
-		Vector3 grab_dir = grabbable.GetGrabDirection();
-
-		float move_speed = grabForce * Time.fixedDeltaTime * Vector3.Dot( grab_dir, controller.LastMoveDirection.normalized );
-		Vector3 move_dir = move_speed * grab_dir;
-
-		grabbable.Rigidbody.MovePosition( grabbable.Rigidbody.position + move_dir );
+		grabbable.Move( player_dir, grabForce );
 	}
 
 	void OnTriggerEnter( Collider collider )

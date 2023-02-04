@@ -32,7 +32,12 @@ public class IntersectionRail : MonoBehaviour
 	{
 		if ( !grabbable ) return;
 
-		print( grabbable + " " + grabbable.Rigidbody.velocity );
+		if ( grabbable.DesiredDirection == Vector3.zero ) return;
+		if ( grabbable.DesiredDirection == grabbable.MoveDirection ) return;
+
+		grabbable.transform.position = new( transform.position.x, grabbable.transform.position.y, transform.position.z );
+		grabbable.MoveDirection = grabbable.DesiredDirection;
+		print( grabbable + " " + grabbable.DesiredDirection );
 	}
 
 	void OnTriggerEnter( Collider collider )
