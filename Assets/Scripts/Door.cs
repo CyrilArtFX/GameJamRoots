@@ -15,10 +15,13 @@ public class Door : MonoBehaviour
     private bool isOpen, isOpening;
     private float timeSinceOpening;
 
+    private AudioSource audioSource;
+
     void Awake()
     {
         startPosition = transform.position;
         positionDelta = endPosition - startPosition;
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void RecordEndPosition()
@@ -30,6 +33,7 @@ public class Door : MonoBehaviour
     {
         if (isOpen || isOpening) return;
         isOpening = true;
+        audioSource.Play();
     }
 
     void FixedUpdate()
