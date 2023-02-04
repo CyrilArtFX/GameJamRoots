@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 24798828}
   - component: {fileID: 24798827}
   - component: {fileID: 24798826}
+  - component: {fileID: 24798831}
   m_Layer: 0
   m_Name: TestLightReflector (2)
   m_TagString: Untagged
@@ -235,6 +236,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -4.829, z: 0}
+--- !u!114 &24798831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24798825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 0, b: 0, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &140026428
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -297,6 +316,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6202819878177480083, guid: f169dbbb52d677648a45ff56c3762844,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6202819878177480083, guid: f169dbbb52d677648a45ff56c3762844,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ce4084f40f73ef46a7e9001e9c38ab2, type: 2}
     - target: {fileID: 919132149155446097, guid: f169dbbb52d677648a45ff56c3762844,
         type: 3}
       propertyPath: m_Name
