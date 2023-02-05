@@ -9,7 +9,7 @@ public class LightSource : MonoBehaviour
     [SerializeField]
     private bool moveablePureLight;
     [SerializeField]
-    private float rayLength = 15.0f;
+    private float rayLength = 50.0f;
 
     [SerializeField]
     private LayerMask lightRayMask;
