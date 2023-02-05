@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utils;
 
 [RequireComponent(typeof(LineRenderer))]
 public class LightSource : MonoBehaviour
@@ -43,13 +44,13 @@ public class LightSource : MonoBehaviour
             {
                 reflector.ReceiveLight(hit.point, ray_direction, hit.normal, this);
             }
-            if(hit.collider.TryGetComponent(out LightBrasier brasier))
+            if (hit.collider.TryGetComponent(out LightBrasier brasier))
             {
                 brasier.TriggerBrasier();
             }
         }
 
-        if(moveablePureLight)
+        if (moveablePureLight)
         {
             SetStartPointAndDirection(transform.position, transform.forward);
         }
@@ -60,7 +61,7 @@ public class LightSource : MonoBehaviour
         transform.position = point;
         transform.forward = direction.normalized;
         line.SetPosition(0, point);
-        
+
         if (Physics.Raycast(point, direction, out RaycastHit hit, 15.0f, lightRayMask))
         {
             line.SetPosition(1, hit.point);
@@ -68,6 +69,15 @@ public class LightSource : MonoBehaviour
         else
         {
             line.SetPosition(1, point + direction * 15.0f);
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        if (moveablePureLight)
+        {
+            Gizmos.color = Color.white;
+            GizmosPlus.DrawArrow(transform.position, transform.forward * 15.0f);
         }
     }
 }
