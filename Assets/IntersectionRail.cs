@@ -62,7 +62,7 @@ public class IntersectionRail : MonoBehaviour
 
 		if ( VectorPlus.GetXZ( grabbable.transform.position - center.position ).sqrMagnitude <= 0.01f )
 		{
-			grabbable.transform.position = center.position.GetXZ();
+			grabbable.transform.position = new( center.position.x, grabbable.transform.position.y, center.position.z );
 			canSwitchDirection = true;
 			grabbable.CanPlayerControl = true;
 		}
