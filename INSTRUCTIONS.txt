@@ -1,0 +1,9 @@
+[Instructions]
+You have to use (grab & rotate) mirrors to reflect lights sources to the braziers to find your way to the tree room.
+
+- Move using [Keyboard WASD] or [Left Joystick]
+- Look using [Mouse] or [Right Joystick]
+- Grab using [Left Mouse Button] or [Gamepad X/East Button]
+- Moving while Grabbing pull/push objects in your direction
+- Rotating Left while Grabbing using [Keyboard A] or [Gamepad Left Trigger]
+- Rotating Right while Grabbing using [Keyboard E] or [Gamepad Right Trigger]
