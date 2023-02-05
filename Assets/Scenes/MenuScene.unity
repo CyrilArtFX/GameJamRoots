@@ -1806,7 +1806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b4cc422d1d6d284688e5ad1941cf854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothSpeed: 2
+  smoothSpeed: 4
 --- !u!65 &209770779
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5268,7 +5268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b4cc422d1d6d284688e5ad1941cf854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothSpeed: 2
+  smoothSpeed: 4
 --- !u!65 &611272124
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15346,6 +15346,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1332019314}
     m_Modifications:
+    - target: {fileID: 403062786, guid: b915351a77eefd84e94877a3d1568d3d, type: 3}
+      propertyPath: smoothSpeed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 403062786, guid: b915351a77eefd84e94877a3d1568d3d, type: 3}
       propertyPath: OnClickEvent.m_PersistentCalls.m_Calls.Array.size
       value: 1
