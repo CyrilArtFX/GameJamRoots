@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectedRails: []
+  center: {fileID: 620090837005045482}
 --- !u!1 &2607592664901262339
 GameObject:
   m_ObjectHideFlags: 0
