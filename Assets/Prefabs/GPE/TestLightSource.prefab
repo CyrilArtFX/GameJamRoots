@@ -45,8 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e234ae908528c64cad849a620d7434d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pureLightSource: 1
   moveablePureLight: 0
+  lightRayMask:
+    serializedVersion: 2
+    m_Bits: 247
+  ReceiveEmission: 0
 --- !u!120 &8204262788860850541
 LineRenderer:
   m_ObjectHideFlags: 0
