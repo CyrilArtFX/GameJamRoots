@@ -17,7 +17,7 @@ public class TreeGrower : MonoBehaviour
 
     public void PassMedium()
     {
-        if (state != TreeState.Little) return;
+        //if (state != TreeState.Little) return;
         state = TreeState.Medium;
         littleTree.SetActive(false);
         mediumTree.SetActive(true);
@@ -26,7 +26,7 @@ public class TreeGrower : MonoBehaviour
 
     public void PassBig()
     {
-        if (state != TreeState.Medium) return;
+        //if (state != TreeState.Medium) return;
         state = TreeState.Big;
         littleTree.SetActive(false);
         mediumTree.SetActive(false);
