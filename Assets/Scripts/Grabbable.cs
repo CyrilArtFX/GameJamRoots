@@ -47,8 +47,8 @@ public class Grabbable : MonoBehaviour
 		target.y = transform.position.y;
 
 		//  get move speed & next position
-		float move_speed = moveSpeed * Time.deltaTime;
-		Vector3 new_position = Vector3.MoveTowards( rigidbody.position, target, move_speed );
+		float move_speed = moveSpeed * Time.fixedDeltaTime;
+		Vector3 new_position = Vector3.MoveTowards( rigidbody.position, target, Mathf.Min( move_speed, (rigidbody.position - target).magnitude ) );
 
 		//  check collision first
 		foreach ( Collider collider in Physics.OverlapBox( new_position, collider.bounds.extents, transform.rotation, obstacleLayerMask ) )
