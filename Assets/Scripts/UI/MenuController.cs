@@ -18,7 +18,7 @@ namespace UI
 		[SerializeField]
 		private CinemachineVirtualCamera camera;
 
-		private int currentButtonID = 0;
+		private int currentButtonID = -1;
 
 		void Start()
 		{

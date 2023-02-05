@@ -30,7 +30,7 @@ namespace UI
 
 		private bool isMouseControlled = true;
 		private bool isInputDisabled = false;
-		private UI3D hoveredUI;
+		private UIButton3D hoveredUI;
 
 		private Vector3 farWorldPos, nearWorldPos, hitPos;
 		private bool hitWasUI = false;
@@ -102,7 +102,7 @@ namespace UI
 			{
 				GameObject hit_object = hit.collider.gameObject;
 
-				if (hit_object.TryGetComponent(out UI3D ui))
+				if (hit_object.TryGetComponent(out UIButton3D ui))
 				{
 					SelectButton(ui);
 					hitWasUI = true;
@@ -121,16 +121,19 @@ namespace UI
 
 		public void PressHovered()
 		{
-			if (hoveredUI == null) return;
+			if (isInputDisabled) return;
+
+			UI3D ui = hoveredUI == null ? currentMenu.CurrentButton : hoveredUI;
+			if (ui == null ) return;
 
 			//  click button
-			hoveredUI.DoClick();
+			ui.DoClick();
 
 			//  disable input
 			DisableInputFor(timeToggleInput);
 		}
 
-		public void SelectButton(UI3D ui)
+		public void SelectButton(UIButton3D ui)
 		{
 			//  unhover last button
 			if (hoveredUI != null)
@@ -155,12 +158,10 @@ namespace UI
 		public void SelectNextButton() 
 		{
 			currentMenu.NextButton();
-			SelectButton(currentMenu.CurrentButton);
 		}
 		public void SelectPreviousButton() 
 		{
 			currentMenu.PreviousButton();
-			SelectButton(currentMenu.CurrentButton);
 		}
 
 		public void Back() => currentMenu.Back();
