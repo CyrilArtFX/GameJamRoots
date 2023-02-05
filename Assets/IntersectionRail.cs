@@ -18,7 +18,7 @@ public class IntersectionRail : MonoBehaviour
 
 	private bool canSwitchDirection = false;
 
-	void Update()
+	void FixedUpdate()
 	{
 		if ( !grabbable ) return;
 
@@ -58,10 +58,11 @@ public class IntersectionRail : MonoBehaviour
 
 	private void SnapToPosition()
 	{
-		grabbable.Move( (center.position - grabbable.transform.position ).normalized );
+		grabbable.Move( ( center.position - grabbable.transform.position ).normalized );
 
-		if ( VectorPlus.GetXZ( grabbable.transform.position - center.position ) == Vector3.zero )
+		if ( VectorPlus.GetXZ( grabbable.transform.position - center.position ).sqrMagnitude <= 0.01f )
 		{
+			grabbable.transform.position = center.position.GetXZ();
 			canSwitchDirection = true;
 			grabbable.CanPlayerControl = true;
 		}
