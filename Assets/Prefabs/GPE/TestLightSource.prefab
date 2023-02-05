@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveablePureLight: 0
+  rayLength: 15.5
   lightRayMask:
     serializedVersion: 2
     m_Bits: 247
