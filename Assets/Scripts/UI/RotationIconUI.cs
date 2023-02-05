@@ -20,8 +20,10 @@ namespace UI
 			Instance = this;
 		}
 
-		void Update()
+		protected override void Update()
 		{
+			base.Update();
+
 			UpdateIcon(leftIcon.rectTransform, -1.0f);
 			UpdateIcon(rightIcon.rectTransform, 1.0f);
 		}

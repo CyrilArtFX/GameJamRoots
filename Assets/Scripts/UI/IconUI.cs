@@ -20,7 +20,7 @@ namespace UI
 			IsShown = false;
 		}
 
-		void FixedUpdate()
+		protected virtual void Update()
 		{
 			if (Target == null) return;
 
