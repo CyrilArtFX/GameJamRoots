@@ -11747,6 +11747,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6955130295179522996, guid: 4541ac34a72721e4f99119bf2966925d,
+        type: 3}
+      propertyPath: onTriggerEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955130295179522996, guid: 4541ac34a72721e4f99119bf2966925d,
+        type: 3}
+      propertyPath: onTriggerEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955130295179522996, guid: 4541ac34a72721e4f99119bf2966925d,
+        type: 3}
+      propertyPath: onTriggerEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955130295179522996, guid: 4541ac34a72721e4f99119bf2966925d,
+        type: 3}
+      propertyPath: onTriggerEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: TextGlow, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6955130295179522997, guid: 4541ac34a72721e4f99119bf2966925d,
         type: 3}
       propertyPath: m_RootOrder
