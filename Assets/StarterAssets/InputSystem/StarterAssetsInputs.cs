@@ -78,10 +78,15 @@ namespace StarterAssets
 		{
 			sprint = newSprintState;
 		}
-		
-		private void OnApplicationFocus(bool hasFocus)
+
+		private void Start()
 		{
-			SetCursorState(cursorLocked);
+			SetCursorState(true);
+		}
+
+		private void OnDestroy()
+		{
+			SetCursorState(false);
 		}
 
 		private void SetCursorState(bool newState)
