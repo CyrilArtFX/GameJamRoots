@@ -9,6 +9,11 @@ public class IntersectionRail : MonoBehaviour
 	[SerializeField]
 	private IntersectionRail[] connectedRails;
 
+	[SerializeField]
+	private Transform center;
+
+	public Transform CenterPos => center;
+
 	private Grabbable grabbable;
 
 	private bool canSwitchDirection = false;
@@ -35,7 +40,7 @@ public class IntersectionRail : MonoBehaviour
 		IntersectionRail next_rail = null;
 		foreach ( IntersectionRail rail in connectedRails )
 		{
-			Vector3 dir = ( rail.transform.position - transform.position ).normalized;
+			Vector3 dir = ( rail.center.position - center.position ).normalized;
 			float dot = Vector3.Dot( dir, grabbable.DesiredDirection );
 			if ( dot > best_dot )
 			{
@@ -53,9 +58,9 @@ public class IntersectionRail : MonoBehaviour
 
 	private void SnapToPosition()
 	{
-		grabbable.Move( ( transform.position - grabbable.transform.position ).normalized );
+		grabbable.Move( (center.position - grabbable.transform.position ).normalized );
 
-		if ( VectorPlus.GetXZ( grabbable.transform.position - transform.position ) == Vector3.zero )
+		if ( VectorPlus.GetXZ( grabbable.transform.position - center.position ) == Vector3.zero )
 		{
 			canSwitchDirection = true;
 			grabbable.CanPlayerControl = true;
@@ -86,12 +91,12 @@ public class IntersectionRail : MonoBehaviour
 		{
 			foreach ( IntersectionRail rail in connectedRails )
 			{
-				Vector3 dir = rail.transform.position - transform.position;
+				Vector3 dir = rail.center.position - center.position;
 				Vector3 dir_normalized = dir.normalized;
 				//GizmosPlus.DrawArrow( transform.position, dir );
 
 				Vector3 offset = new( dir_normalized.z * 0.1f, 0.0f, -dir_normalized.x * 0.1f );
-				GizmosPlus.DrawArrow( transform.position + offset, dir );
+				GizmosPlus.DrawArrow(center.position + offset, dir );
 			}
 		}
 	}

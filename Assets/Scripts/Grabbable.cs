@@ -39,10 +39,10 @@ public class Grabbable : MonoBehaviour
 		};
 
 		//  get target position
-		Vector3 target = NextRail.transform.position;
-		if ( Vector3.Dot( NextRail.transform.position - transform.position, desired_dir ) < 0.0f )
+		Vector3 target = NextRail.CenterPos.position;
+		if ( Vector3.Dot( NextRail.CenterPos.position - transform.position, desired_dir ) < 0.0f )
 		{
-			target = PreviousRail.transform.position;
+			target = PreviousRail.CenterPos.position;
 		}
 		target.y = transform.position.y;
 
@@ -68,14 +68,14 @@ public class Grabbable : MonoBehaviour
 		if ( PreviousRail != null )
 		{
 			Gizmos.color = Color.cyan;
-			Vector3 dir = PreviousRail.transform.position - transform.position;
+			Vector3 dir = PreviousRail.CenterPos.position - transform.position;
 			dir.y = 0.0f;
 			GizmosPlus.DrawArrow( transform.position, dir );
 		}
 		if ( NextRail != null )
 		{
 			Gizmos.color = Color.yellow;
-			Vector3 dir = NextRail.transform.position - transform.position;
+			Vector3 dir = NextRail.CenterPos.position - transform.position;
 			dir.y = 0.0f;
 			GizmosPlus.DrawArrow( transform.position, dir );
 		}
