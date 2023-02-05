@@ -1,6 +1,7 @@
 ﻿using StarterAssets;
 using System;
 using System.Collections;
+using UI;
 using UnityEngine;
 
 public class Grabber : MonoBehaviour
@@ -23,7 +24,16 @@ public class Grabber : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if ( !IsCurrentlyGrabbing || !grabbable.CanPlayerControl ) return;
+		//  grab icon
+		if (GrabIconUI.Instance != null)
+		{
+			GrabIconUI.Instance.IsShown = grabbable != null;
+			GrabIconUI.Instance.SetGrabbing(controller.Input.isGrabbing);
+			GrabIconUI.Instance.Target = grabbable != null ? grabbable.transform : null;
+		}
+
+		if (!IsCurrentlyGrabbing) return;
+		if (!grabbable.CanPlayerControl) return;
 
 		Vector3 player_dir = controller.LastMoveDirection;
 		player_dir.y = 0.0f;

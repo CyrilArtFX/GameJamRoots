@@ -1,4 +1,5 @@
 using StarterAssets;
+using UI;
 using UnityEngine;
 
 public class Rotator : MonoBehaviour
@@ -25,6 +26,22 @@ public class Rotator : MonoBehaviour
     void Update()
     {
         float rotation = controller.Input.rotation;
+
+        //  rotation icons
+        RotationIconUI icon = RotationIconUI.Instance; 
+        if (icon != null)
+        {
+            icon.RotatingDirection = rotation * currentSpeedMultiplier;
+
+            if (grabber.Grabbable && grabber.Grabbable.Rotable && grabber.IsCurrentlyGrabbing)
+            {
+                icon.IsShown = true;
+                icon.Target = grabber.Grabbable.Rotable.transform;
+            }
+            else
+                icon.IsShown = false;
+        }
+
         if ( !grabber.Grabbable || !grabber.Grabbable.Rotable || !grabber.IsCurrentlyGrabbing || rotation == 0.0f ) 
         {
             currentAccelerationTime = 0.0f;
@@ -38,6 +55,6 @@ public class Rotator : MonoBehaviour
             currentSpeedMultiplier = Mathf.Lerp(currentSpeedMultiplier, fastRotationMultiplier, Time.deltaTime * accelerationSpeed);
         }
 
-        grabber.Grabbable.Rotable.Rotate( rotation * currentSpeedMultiplier * Time.deltaTime );
+        grabber.Grabbable.Rotable.Rotate(rotation * currentSpeedMultiplier * Time.deltaTime);
     }
 }
