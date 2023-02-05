@@ -8,6 +8,8 @@ public class LightSource : MonoBehaviour
 
     [SerializeField]
     private bool moveablePureLight;
+    [SerializeField]
+    private float rayLength = 15.0f;
 
     [SerializeField]
     private LayerMask lightRayMask;
@@ -38,7 +40,7 @@ public class LightSource : MonoBehaviour
         Vector3 ray_origin = transform.position;
         Vector3 ray_direction = transform.forward;
 
-        if (Physics.Raycast(ray_origin, ray_direction, out RaycastHit hit, 15.0f, lightRayMask))
+        if (Physics.Raycast(ray_origin, ray_direction, out RaycastHit hit, rayLength, lightRayMask))
         {
             if (hit.collider.TryGetComponent(out LightReflector reflector))
             {
@@ -62,13 +64,13 @@ public class LightSource : MonoBehaviour
         transform.forward = direction.normalized;
         line.SetPosition(0, point);
 
-        if (Physics.Raycast(point, direction, out RaycastHit hit, 15.0f, lightRayMask))
+        if (Physics.Raycast(point, direction, out RaycastHit hit, rayLength, lightRayMask))
         {
             line.SetPosition(1, hit.point);
         }
         else
         {
-            line.SetPosition(1, point + direction * 15.0f);
+            line.SetPosition(1, point + direction * rayLength);
         }
     }
 
@@ -77,7 +79,7 @@ public class LightSource : MonoBehaviour
         if (moveablePureLight)
         {
             Gizmos.color = Color.white;
-            GizmosPlus.DrawArrow(transform.position, transform.forward * 15.0f);
+            GizmosPlus.DrawArrow(transform.position, transform.forward * rayLength);
         }
     }
 }
